@@ -13,3 +13,10 @@
 7. Запустите Ngrok htpp на порту 9000. Сделайте его скриншот и добавьте в README.md
 
 Ответ:
+
+## Содержимое докер контейнера
+<img src="media/files_in_container.PNG" alt="Files in Docker container" height="400">
+
+## Ngrok на порту 9000
+
+![Ngrok](media/ngrok_9000.PNG)
