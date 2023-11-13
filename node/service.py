@@ -1,5 +1,4 @@
-import ujson
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 from uc_flow_nodes.schemas import NodeRunContext
 from uc_flow_nodes.service import NodeService
@@ -10,23 +9,35 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = 'a38f071e-110b-4f91-bf90-2624ca6b879f'
+    id: str = 'd88135c1-29e6-4d7a-a9a1-3b5a52bdeab1'
     type: flow.NodeType.Type = flow.NodeType.Type.action
-    name: str = 'awesome_service'
+    name: str = 'adding_numbers_service'
     is_public: bool = False
-    displayName: str = 'Awesome service'
-    icon: str = '<svg><text x="8" y="50" font-size="50">🤖</text></svg>'
-    description: str = 'Service for awesome things'
+    displayName: str = 'Adding numbers service'
+    icon: str = '<svg><text x="8" y="50" font-size="50">🧮</text></svg>'
+    description: str = 'Service for adding numbers as string and number'
     properties: List[Property] = [
         Property(
-            displayName='Тестовое поле',
-            name='foo_field',
-            type=Property.Type.JSON,
-            placeholder='Foo placeholder',
-            description='Foo description',
+            displayName='Text field',
+            name='text_field',
+            type=Property.Type.STRING,
             required=True,
-            default='Test data',
-        )
+            default='',
+        ),
+        Property(
+            displayName='Number field',
+            name='number_field',
+            type=Property.Type.NUMBER,
+            required=True,
+            default='',
+        ),
+        Property(
+            displayName='String/Number',
+            name='toggle',
+            type=Property.Type.BOOLEAN,
+            required=True,
+            default=True
+        ),
     ]
 
 
@@ -37,9 +48,14 @@ class InfoView(info.Info):
 
 class ExecuteView(execute.Execute):
     async def post(self, json: NodeRunContext) -> NodeRunContext:
+        properties: Dict = json.node.data.properties
         try:
+            text_value: str = properties['text_field']
+            number_value: int = properties['number_field']
+            toggle_value = properties['toggle']
+            result = int(text_value) + number_value
             await json.save_result({
-                "result": json.node.data.properties['foo_field']
+                "result": result if toggle_value is True else str(result)
             })
             json.state = RunState.complete
         except Exception as e:
