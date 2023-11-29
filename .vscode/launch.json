@@ -1,6 +1,8 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
+
     {
       "name": "Python: uc-flow-node",
       "type": "python",
@@ -11,7 +13,7 @@
       },
       "console": "integratedTerminal",
       "args": [
-        "node.service",
+        "node.component",
         "-c",
         "node/config.yaml"
       ]

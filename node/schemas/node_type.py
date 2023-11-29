@@ -1,15 +1,14 @@
 from typing import List
 from uc_flow_schemas import flow
-from uc_flow_schemas.flow import (
-    Property,
-    NodeType as  DisplayOptions, OptionValue,
-)
+from uc_flow_schemas.flow import (Property,
+                                  OptionValue, 
+                                  DisplayOptions)
 
 from node.schemas.enums import FirstField, SecondField
 
 
 class NodeType(flow.NodeType):
-    id: str = 'd88135c1-29e6-4d7a-a9a1-3b5a52bdeab1'
+    id: str = 'a127d39d-f916-42ca-b197-4c9624cf8e3b'
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'holihop_beyond'
     is_public: bool = False
